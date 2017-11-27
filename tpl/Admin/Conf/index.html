@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>配置管理 - xfadmin</title>
+    <bootstrapcss/>
+</head>
+
+<body>
+    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 配置管理</div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#home" data-toggle="tab">配置列表</a>
+        </li>
+        <li>
+            <a href="{:U('Admin/Conf/add')}">添加配置</a>
+        </li>
+    </ul>
+    <form action="{:U('Admin/Nav/order')}" method="post">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <tr>
+                        <th width="5%">排序</th>
+                        <th>中文名称</th>
+                        <th>英文名称</th>
+                        <th>所属类型</th>
+                        <th>默认值</th>
+                        <th>可选值</th>
+                        <th>操作</th>
+                    </tr>
+                    <foreach name="data" item="v">
+                        <tr>
+                            <td>
+                                <input class="form-control" style="width:40px;height:25px;" type="text" name="{$v['id']}" value="{$v['sort']}">
+                            </td>
+                            <td>{$v['cname']}</td>
+                            <td>{$v['ename']}</td>
+                            <td>
+                                <if condition="$v['d_type'] eq 1">输入框</if>
+                                <if condition="$v['d_type'] eq 2">单选框</if>
+                                <if condition="$v['d_type'] eq 3">复选框</if>
+                                <if condition="$v['d_type'] eq 4">下拉菜单</if>
+                                <if condition="$v['d_type'] eq 5">文本域</if>
+                                <if condition="$v['d_type'] eq 6">附件</if>
+                            </td>
+                            <td>{$v['value']}</td>
+                            <td>{$v['values']}</td>
+                            <td>
+                                <a href="{:U('Admin/Conf/edit',array('id'=>$v['id']))}">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Conf/delete',array('id'=>$v['id']))}'">删除</a>
+                            </td>
+                        </tr>
+                    </foreach>
+                    <tr>
+                        <th>
+                            <input class="btn btn-success" type="submit" value="排序">
+                        </th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+    <bootstrapjs/>
+</body>
+
+</html>

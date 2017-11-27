@@ -5,7 +5,16 @@ use Think\Model;
  * 基础model
  */
 class BaseModel extends Model{
-
+    /**
+     * 查询一条数据
+     * @param  string $field  添加的数据
+     * @param  int $id  id
+     * @return array          查询结果
+     */
+    public function findData($id,$field){
+        $result = $this->field($field)->where(array('id'=>$id))->find();
+        return $result;
+    }
     /**
      * 添加数据
      * @param  array $data  添加的数据
