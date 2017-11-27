@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>修改配置 - xfadmin</title>
+    <bootstrapcss/>
+    <icheckcss/>
+</head>
+
+<body>
+    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; 修改配置</div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li> <a href="{:U('Admin/Conf/index')}">配置列表</a></li>
+        <li class="active"> <a href="{:U('Admin/Conf/add')}">修改配置</a></li>
+    </ul>
+    <form class="form-inline" action="{:U('Admin/Conf/save')}" method="post">
+        <input type="hidden" name="id" value="{$data['id']}">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>中文名称</th>
+                <td>
+                    <input class="form-control" required="" type="text" name="cname" value="{$data['cname']}">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th>英文名称</th>
+                <td>
+                    <input class="form-control" required="" type="text" name="ename" value="{$data['ename']}">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th>类型</th>
+                <td>
+                    <select class="form-control" name="d_type">
+                    	<option <if condition="$data['d_type'] eq 1">selected="selected"</if> value="1">输入框</option>
+                        <option <if condition="$data['d_type'] eq 2">selected="selected"</if> value="2">单选框</option>
+                        <option <if condition="$data['d_type'] eq 3">selected="selected"</if> value="3">复选框</option>
+                        <option <if condition="$data['d_type'] eq 4">selected="selected"</if> value="4">下拉菜单</option>
+                        <option <if condition="$data['d_type'] eq 5">selected="selected"</if> value="5">文本域</option>
+                        <option <if condition="$data['d_type'] eq 6">selected="selected"</if> value="6">附件</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>默认值</th>
+                <td>
+                    <input class="form-control" type="text" name="value" value="{$data['value']}">
+                </td>
+            </tr>
+            <tr>
+                <th>可选值</th>
+                <td>
+                    <textarea class="form-control" name="values">{$data['values']}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input class="btn btn-success" type="submit" value="修改">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <bootstrapjs/>
+    <icheckjs color="blue" />
+</body>
+
+</html>
