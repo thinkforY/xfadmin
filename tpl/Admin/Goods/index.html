@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>配置管理 - xfadmin</title>
+    <title>商品管理 - xfadmin</title>
     <bootstrapcss/>
 </head>
 
 <body>
-    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 配置管理</div>
+    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 商品管理</div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
-            <a href="#home" data-toggle="tab">配置列表</a>
+            <a href="#home" data-toggle="tab">商品列表</a>
         </li>
         <li>
-            <a href="{:U('Admin/Conf/add')}">添加配置</a>
+            <a href="{:U('Admin/Goods/add')}">添加商品</a>
         </li>
     </ul>
     <form action="{:U('Admin/Nav/order')}" method="post">
@@ -48,7 +48,7 @@
                             <td>{$v['value']}</td>
                             <td>{$v['values']}</td>
                             <td>
-                                <a href="{:U('Admin/Conf/edit',array('id'=>$v['id']))}">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Conf/delete',array('id'=>$v['id']))}'">删除</a>
+                                <a href="{:U('Admin/Goods/edit',array('id'=>$v['id']))}">修改</a> | <a href="javascript:if(Goodsirm('确定删除？'))location='{:U('Admin/Goods/delete',array('id'=>$v['id']))}'">删除</a>
                             </td>
                         </tr>
                     </foreach>
