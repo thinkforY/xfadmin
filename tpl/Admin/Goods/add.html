@@ -3,65 +3,80 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>添加配置 - xfadmin</title>
+    <title>添加商品 - xfadmin</title>
     <bootstrapcss/>
     <icheckcss/>
 </head>
 
 <body>
-    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; 添加配置</div>
-    <ul id="myTab" class="nav nav-tabs">
-        <li> <a href="{:U('Admin/Conf/index')}">配置列表</a></li>
-        <li class="active"> <a href="{:U('Admin/Conf/add')}">添加配置</a></li>
+    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; 添加商品</div>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#item1" aria-controls="item1" role="tab" data-toggle="tab">基本信息</a></li>
+        <li role="presentation"><a href="#item2" aria-controls="item2" role="tab" data-toggle="tab">商品详情</a></li>
+        <li role="presentation"><a href="#item3" aria-controls="item3" role="tab" data-toggle="tab">规格参数</a></li>
+        <li role="presentation"><a href="#item4" aria-controls="item4" role="tab" data-toggle="tab">售后保障</a></li>
+        <li role="presentation"><a href="#item5" aria-controls="item5" role="tab" data-toggle="tab">商品型号</a></li>
+        <li role="presentation"><a href="#item6" aria-controls="item6" role="tab" data-toggle="tab">商品图片</a></li>
     </ul>
-    <form class="form-inline" action="{:U('Admin/Conf/save')}" method="post">
-        <table class="table table-striped table-bordered table-hover table-condensed">
-            <tr>
-                <th>中文名称</th>
-                <td>
-                    <input class="form-control" required="" type="text" name="cname">
-                    <span style="color: #ff0000">必填 *</span>
-                </td>
-            </tr>
-            <tr>
-                <th>英文名称</th>
-                <td>
-                    <input class="form-control" required="" type="text" name="ename">
-                    <span style="color: #ff0000">必填 *</span>
-                </td>
-            </tr>
-            <tr>
-                <th>类型</th>
-                <td>
-                    <select class="form-control" name="d_type">
-                    	<option value="1">输入框</option>
-                        <option value="2">单选框</option>
-                        <option value="3">复选框</option>
-                        <option value="4">下拉菜单</option>
-                        <option value="5">文本域</option>
-                        <option value="6">附件</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>默认值</th>
-                <td>
-                    <input class="form-control" type="text" name="value">
-                </td>
-            </tr>
-            <tr>
-                <th>可选值</th>
-                <td>
-                    <textarea class="form-control" name="values"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td>
-                    <input class="btn btn-success" type="submit" value="添加">
-                </td>
-            </tr>
-        </table>
+
+    <!-- Tab panes -->
+    <form class="form-inline" action="{:U('Admin/Goods/save')}" method="post">
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="item1">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <tr>
+                    <th>中文名称</th>
+                    <td>
+                        <input class="form-control" required="" type="text" name="cname">
+                        <span style="color: #ff0000">必填 *</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>英文名称</th>
+                    <td>
+                        <input class="form-control" required="" type="text" name="ename">
+                        <span style="color: #ff0000">必填 *</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>类型</th>
+                    <td>
+                        <select class="form-control" name="d_type">
+                            <option value="1">输入框</option>
+                            <option value="2">单选框</option>
+                            <option value="3">复选框</option>
+                            <option value="4">下拉菜单</option>
+                            <option value="5">文本域</option>
+                            <option value="6">附件</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>默认值</th>
+                    <td>
+                        <input class="form-control" type="text" name="value">
+                    </td>
+                </tr>
+                <tr>
+                    <th>可选值</th>
+                    <td>
+                        <textarea class="form-control" name="values"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>
+                        <input class="btn btn-success" type="submit" value="添加">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="item2">...2</div>
+        <div role="tabpanel" class="tab-pane" id="item3">...3</div>
+        <div role="tabpanel" class="tab-pane" id="item4">...4</div>
+        <div role="tabpanel" class="tab-pane" id="item5">...5</div>
+        <div role="tabpanel" class="tab-pane" id="item6">...6</div>
+      </div>
     </form>
     <bootstrapjs/>
     <icheckjs color="blue" />
