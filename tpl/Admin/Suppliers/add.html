@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>添加供应商 - xfadmin</title>
+    <bootstrapcss/>
+    <icheckcss/>
+</head>
+
+<body>
+    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; 添加供应商</div>
+    <ul id="myTab" class="nav nav-tabs">
+        <li> <a href="{:U('Admin/Suppliers/index')}">供应商列表</a></li>
+        <li class="active"> <a href="{:U('Admin/Suppliers/add')}">添加供应商</a></li>
+    </ul>
+    <form class="form-inline" action="{:U('Admin/Suppliers/save')}" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="pid" value="0">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th width="12%">供应商名称：</th>
+                <td>
+                    <input class="form-control" type="text" required="" name="suppliers_name">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th width="12%">店铺名称：</th>
+                <td>
+                    <input class="form-control" type="text" required="" name="suppliers_title">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th width="12%">供应商联系方式：</th>
+                <td>
+                    <input class="form-control" type="text" required="" name="suppliers_phone">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th width="12%">供应商邮箱：</th>
+                <td>
+                    <input class="form-control" type="text" required="" name="suppliers_mail">
+                    <span style="color: #ff0000">必填 *</span>
+                </td>
+            </tr>
+            <tr>
+                <th>供应商logo：</th>
+                <td>
+                    <input class="form-control" type="file" name="suppliers_logo"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input class="btn btn-success" type="submit" value="添加">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <bootstrapjs/>
+    <icheckjs color="blue" />
+</body>
+
+</html>
