@@ -23,7 +23,8 @@ return array(
         '__USER_IMAGES__'    => OSS_URL.trim(TMPL_PATH,'.').'User/Public/images',
         '__APP_CSS__'        => __ROOT__.trim(TMPL_PATH,'.').'App/Public/css',
         '__APP_JS__'         => __ROOT__.trim(TMPL_PATH,'.').'App/Public/js',
-        '__APP_IMAGES__'     => OSS_URL.trim(TMPL_PATH,'.').'App/Public/images'
+        '__APP_IMAGES__'     => OSS_URL.trim(TMPL_PATH,'.').'App/Public/images',
+        '__UPLOAD__'         => OSS_URL.__ROOT__.'/Upload'
     ),
 //***********************************URL设置**************************************
     'MODULE_ALLOW_LIST'      => array('Home','Admin','Api','User','App'), //允许访问列表

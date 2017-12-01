@@ -25,7 +25,7 @@
                 <foreach name="data" item="v">
                     <tr>
                         <td>{$v['rec_name']}</td>
-                        <td><if condition="$v['rec_type'] eq 1">商品推荐位<else />分类推荐位</if></td>
+                        <td><if condition="$v['rec_type'] eq 0">商品推荐位<else />分类推荐位</if></td>
                         <td> <a href="javascript:;" RecposId="{$v['id']}" RecposType="{$v['rec_type']}" RecposName="{$v['rec_name']}" onclick="edit(this)">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Recpos/delete',array('id'=>$v['id']))}'">删除</a></td>
                     </tr>
                 </foreach>
@@ -52,9 +52,9 @@
                                 <th width="20%">推荐位分类：</th>
                                 <td>
                                     <span class="inputword">商品推荐位</span> 
-                                    <input class="xb-icheck" type="radio" name="rec_type" value="1" checked="checked"> &emsp; 
+                                    <input class="xb-icheck" type="radio" name="rec_type" value="0" checked="checked"> &emsp; 
                                     <span class="inputword">分类推荐位</span> 
-                                    <input class="xb-icheck" type="radio" name="rec_type" value="2">
+                                    <input class="xb-icheck" type="radio" name="rec_type" value="1">
                                 </td>
                             </tr>
                             <tr>
@@ -89,9 +89,9 @@
                                 <th>推荐位：</th>
                                 <td>
                                 	<span class="inputword">商品推荐位</span> 
-                                    <input class="xb-icheck" type="radio" name="rec_type" value="1" checked="checked"> &emsp; 
+                                    <input class="xb-icheck edittype" type="radio" name="rec_type" value="0"> &emsp; 
                                     <span class="inputword">分类推荐位</span> 
-                                    <input class="xb-icheck" type="radio" name="rec_type" value="2">    
+                                    <input class="xb-icheck edittype" type="radio" name="rec_type" value="1">    
                                 </td>
                             </tr>
                             <tr>
@@ -121,7 +121,7 @@
         var RecposName = $(obj).attr('RecposName');
         $("input[name='id']").val(RecposId);
         $("input[name='rec_name']").val(RecposName);
-        $("input[name='rec_type']").eq(1).attr("checked","checked");
+        $(".edittype").eq(RecposType).attr("checked",true);
         $('#bjy-edit').modal('show');
     }
     </script>

@@ -14,46 +14,29 @@
         <li> <a href="{:U('Admin/Cate/index')}">分类列表</a></li>
         <li class="active"> <a href="{:U('Admin/Cate/add')}">添加分类</a></li>
     </ul>
-    <form class="form-inline" action="{:U('Admin/Cate/save')}" method="post">
+    <form class="form-inline" action="{:U('Admin/Cate/save')}" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="pid" value="0">
         <table class="table table-striped table-bordered table-hover table-condensed">
             <tr>
-                <th>中文名称</th>
+                <th width="12%">分类名：</th>
                 <td>
-                    <input class="form-control" required="" type="text" name="cname">
+                    <input class="form-control" type="text" required="" name="catename">
                     <span style="color: #ff0000">必填 *</span>
                 </td>
             </tr>
             <tr>
-                <th>英文名称</th>
+                <th>推荐：</th>
                 <td>
-                    <input class="form-control" required="" type="text" name="ename">
-                    <span style="color: #ff0000">必填 *</span>
+                    <foreach name="recpos" item="vo">
+                        <input class="xb-icheck" name="rec_id[]" type="checkbox" value="{$vo['id']}">
+                        <span style="padding-right: 10px;" class="inputword">{$vo['rec_name']}</span>
+                    </foreach>
                 </td>
             </tr>
             <tr>
-                <th>类型</th>
+                <th>图片：</th>
                 <td>
-                    <select class="form-control" name="d_type">
-                    	<option value="1">输入框</option>
-                        <option value="2">单选框</option>
-                        <option value="3">复选框</option>
-                        <option value="4">下拉菜单</option>
-                        <option value="5">文本域</option>
-                        <option value="6">附件</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>默认值</th>
-                <td>
-                    <input class="form-control" type="text" name="value">
-                </td>
-            </tr>
-            <tr>
-                <th>可选值</th>
-                <td>
-                    <textarea class="form-control" name="values"></textarea>
-                </td>
+                    <input class="form-control" type="file" name="catepic"></td>
             </tr>
             <tr>
                 <th></th>

@@ -37,4 +37,15 @@ class CateModel extends BaseModel{
 		$this->where(array($map))->delete();
 		return true;
 	}
+
+	//获取分类推荐位
+	public function getCateRecposs(){
+		$recpos = D("Recpos");
+		return $recpos->field('id,rec_name')->where(array('rec_type'=>1))->select();
+	}
+	//获取推荐位的值
+	public function getRecValue(){
+		$recvalue = D("Recvalue");
+		return $recvalue->field('rec_id,value_id')->where(array("rec_type"=>1))->select();
+	}
 }

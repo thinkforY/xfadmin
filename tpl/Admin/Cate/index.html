@@ -8,13 +8,13 @@
 </head>
 
 <body>
-    <div class="bjy-admin-Cate"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 分类管理</div>
+    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 分类管理</div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
             <a href="#home" data-toggle="tab">分类列表</a>
         </li>
         <li>
-            <a href="javascript:;" onclick="add()">添加分类</a>
+            <a href="{:U('Admin/Cate/add')}">添加分类</a>
         </li>
     </ul>
     <form action="{:U('Admin/Cate/order')}" method="post">
@@ -37,7 +37,7 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <a href="javascript:;" CateId="{$v['id']}" CateName="{$v['name']}" onclick="add_child(this)">添加子分类</a> | <a href="javascript:;" CateId="{$v['id']}" CateName="{$v['name']}" CateMca="{$v['mca']}" CateIco="{$v['ico']}" onclick="edit(this)">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Cate/delete',array('id'=>$v['id']))}'">删除</a>
+                                <a href="javascript:;" CateId="{$v['id']}" CateName="{$v['catename']}" onclick="add_child(this)">添加子分类</a> | <if condition="$v['pid'] neq 0"><a href="javascript:;" CateId="{$v['id']}" CateName="{$v['catename']}" onclick="edit(this)">修改</a><else /><a href="{:U('Admin/Cate/edit',array('id'=>$v['id']))}">修改</a></if> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Cate/delete',array('id'=>$v['id']))}'">删除</a>
                             </td>
                         </tr>
                     </foreach>
@@ -57,9 +57,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> 添加分类</h4></div>
+                    <h4 class="modal-title" id="myModalLabel"> 添加子分类</h4></div>
                 <div class="modal-body">
-                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Cate/add')}" method="post">
+                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Cate/addcld')}" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="pid" value="0">
                         <table class="table table-striped table-bordered table-hover table-condensed">
                             <tr>
@@ -67,15 +67,6 @@
                                 <td>
                                     <input class="form-control" type="text" name="catename">
                                 </td>
-                            </tr>
-                            <tr>
-                                <th>推荐：</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>图片：</th>
-                                <td>
-                                    <input class="form-control" type="file" name="catepic"></td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -94,9 +85,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> 修改分类</h4></div>
+                    <h4 class="modal-title" id="myModalLabel"> 修改子分类</h4></div>
                 <div class="modal-body">
-                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Cate/edit')}" method="post">
+                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Cate/editcld')}" method="post">
                         <input type="hidden" name="id">
                         <table class="table table-striped table-bordered table-hover table-condensed">
                             <tr>
@@ -104,15 +95,6 @@
                                 <td>
                                     <input class="form-control" type="text" name="catename">
                                 </td>
-                            </tr>
-                            <tr>
-                                <th>推荐：</th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>图片：</th>
-                                <td>
-                                    <input class="form-control" type="file" name="catepic"></td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -128,20 +110,11 @@
     </div>
     <bootstrapjs/>
     <script>
-    // 添加分类
-    function add() {
-        $("input[name='name'],input[name='mca']").val('');
-        $("input[name='pid']").val(0);
-        $('#bjy-add').modal('show');
-    }
 
     // 添加子分类
     function add_child(obj) {
         var CateId = $(obj).attr('CateId');
         $("input[name='pid']").val(CateId);
-        $("input[name='catename']").val('');
-        $("input[name='']").val('');
-        $("input[name='catepic']").val('');
         $('#bjy-add').modal('show');
     }
 
@@ -149,12 +122,8 @@
     function edit(obj) {
         var CateId = $(obj).attr('CateId');
         var CateName = $(obj).attr('CateName');
-        var CateMca = $(obj).attr('CateMca');
-        var CateIco = $(obj).attr('CateIco');
         $("input[name='id']").val(CateId);
-        $("input[name='name']").val(CateName);
-        $("input[name='mca']").val(CateMca);
-        $("input[name='ico']").val(CateIco);
+        $("input[name='catename']").val(CateName);
         $('#bjy-edit').modal('show');
     }
     </script>
