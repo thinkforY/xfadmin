@@ -24,8 +24,6 @@
                     <tr>
                         <th width="5%">排序</th>
                         <th>分类名</th>
-                        <th>推荐</th>
-                        <th>图片</th>
                         <th width="15%">操作</th>
                     </tr>
                     <foreach name="data" item="v">
@@ -34,8 +32,6 @@
                                 <input class="form-control" style="width:40px;height:25px;" type="text" name="{$v['id']}" value="{$v['order_number']}">
                             </td>
                             <td>{$v['_name']}</td>
-                            <td></td>
-                            <td></td>
                             <td>
                                 <a href="javascript:;" CateId="{$v['id']}" CateName="{$v['catename']}" onclick="add_child(this)">添加子分类</a> | <if condition="$v['pid'] neq 0"><a href="javascript:;" CateId="{$v['id']}" CateName="{$v['catename']}" onclick="edit(this)">修改</a><else /><a href="{:U('Admin/Cate/edit',array('id'=>$v['id']))}">修改</a></if> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Cate/delete',array('id'=>$v['id']))}'">删除</a>
                             </td>

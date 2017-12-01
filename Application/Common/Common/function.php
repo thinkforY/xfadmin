@@ -967,11 +967,11 @@ function crop_image($image_path,$width=170,$height=170){
     $image_path=trim($image_path,'.');
     $min_path='.'.str_replace('.', '_'.$width.'_'.$height.'.', $image_path);
     $image = new \Think\Image();
-    $image->open($image_path);
+    $image->open('.'.$image_path);
     // 生成一个居中裁剪为$width*$height的缩略图并保存
     $image->thumb($width, $height,\Think\Image::IMAGE_THUMB_CENTER)->save($min_path);
-    oss_upload($min_path);
-    return $min_path;
+    // oss_upload($min_path);
+    return substr($min_path, 1);
 }
 
 /**

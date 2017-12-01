@@ -47,7 +47,7 @@ class CateController extends AdminBaseController{
 		$rec = $cate->getCateRecposs();
 		foreach ($rec as $k => $v) {
 			foreach ($recres as $k1 => $v1) {
-				if ($v1['rec_id'] == $v['id']) {
+				if ($v1['rec_id'] == $v['id'] && $v1['value_id'] == $id) {
 					$rec[$k]['check'] = "checked";
 				}else{
 					$rec[$k]['check'] = "";
@@ -81,10 +81,11 @@ class CateController extends AdminBaseController{
 		$recv = D("recvalue");
 		$post=I('post.');
 		$catepic = post_upload("/Upload/Cate/");
-		if ($catepic) {
+		if ($catepic['name']) {
+			$thumbSize = crop_image($catepic['name'],118,143);
 			$cateres = $cate->findData($post['id'],"catepic");
 			@unlink('.'.$cateres['catepic']);
-			$data['catepic'] = $catepic['name'];
+			$data['catepic'] = $thumbSize;
 		}
 		$data['catename'] = $post['catename'];
 		$data['pid'] = 0;
