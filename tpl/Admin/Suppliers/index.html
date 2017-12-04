@@ -27,7 +27,7 @@
                         <td>{$v['suppliers_name']}</td>
                         <td>{$v['suppliers_title']}</td>
                         <td>{$v['suppliers_phone']}</td>
-                        <td> <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>1))}">企业简介</a> | <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>2))}">企业资质</a> | <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>3))}">企业实力</a> | <a href="{:U('Admin/Suppliers/edit')}">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Suppliers/delete',array('id'=>$v['id']))}'">删除</a></td>
+                        <td> <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>1))}">企业简介</a> | <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>2))}">企业资质</a> | <a href="{:U('Admin/Suppliers/description',array('id'=>$v['id'],'type'=>3))}">企业实力</a> | <a href="{:U('Admin/Suppliers/edit',array('id'=>$v['id']))}">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Suppliers/delete',array('id'=>$v['id']))}'">删除</a></td>
                     </tr>
                 </foreach>
             </table>

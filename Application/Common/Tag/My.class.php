@@ -267,7 +267,7 @@ php;
     public function _ueditor($tag){
         $name=isset($tag['name']) ? $tag['name'] : 'content';
         $content=isset($tag['content']) ? $tag['content'] : '';
-        $height=isset($tag['height']) ? $tag['height'] : '300';
+        $height=isset($tag['height']) ? $tag['height'] : '500';
         $link=<<<php
 <script id="container" name="$name" type="text/plain">
     $content

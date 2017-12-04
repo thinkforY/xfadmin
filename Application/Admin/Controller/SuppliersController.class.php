@@ -11,9 +11,11 @@ class SuppliersController extends AdminBaseController{
      * 供应商列表
      */
     public function index(){
-        $data=D('Suppliers')->getTreeData('tree','id','suppliers_name');
+        $suppliers = D('Suppliers');
+        $data=$suppliers->getPage($suppliers,"",'id',10,'id,suppliers_name,suppliers_logo,suppliers_phone,suppliers_mail,suppliers_title');
         $assign=array(
-            'data'=>$data
+            'data'=>$data['data'],
+            'page'=>$data['page'],
             );
         $this->assign($assign);
         $this->display();
@@ -23,7 +25,6 @@ class SuppliersController extends AdminBaseController{
      * 添加供应商
      */
     public function add(){
-        
         $this->display();
     }
 
@@ -31,17 +32,10 @@ class SuppliersController extends AdminBaseController{
      * 修改供应商
      */
     public function edit(){
+        $id = I('id');
+        $data = D('Suppliers')->findData($id,"id,suppliers_name,suppliers_logo,suppliers_phone,suppliers_mail,suppliers_title");
+        $this->assign("data",$data);
         $this->display();
-        $data=I('post.');
-        $map=array(
-            'id'=>$data['id']
-            );
-        $result=D('Suppliers')->editData($map,$data);
-        if ($result) {
-            $this->success('修改成功',U('Admin/Suppliers/index'));
-        }else{
-            $this->error('修改失败');
-        }
     }
     public function save(){
         $data = I('post.');
@@ -57,7 +51,7 @@ class SuppliersController extends AdminBaseController{
             $map['id'] = $data['id'];
             $result = $suppliers->editData($map,$data);
             if ($result) {
-                $this->success("修改供应商成功",U('Admin/Cate/index'));
+                $this->success("修改供应商成功",U('Admin/Suppliers/index'));
             }else{
                 $this->error("修改供应商失败");
             }
@@ -73,7 +67,36 @@ class SuppliersController extends AdminBaseController{
     }
     //企业简介、企业资质、企业实力
     public function description(){
+        $id = I('id');
+        $type = I('type');
+        $data = D("Suppliers")->findData($id,"id,suppliers_profile,suppliers_qualification,suppliers_strength");
+        $data['type'] = $type;
+        if ($type == 1) {
+            $data['desc'] = $data['suppliers_profile'];
+        }elseif($type == 2){
+            $data['desc'] = $data['suppliers_qualification'];
+        }else{
+            $data['desc'] = $data['suppliers_strength'];
+        }
+        $this->assign('data',$data);
         $this->display();
+    }
+    public function desc_save(){
+        $post = I('post.');
+        $map['id'] = $post['id'];
+        if ($post['type'] == 1) {
+            $data['suppliers_profile'] = $post['desc'];
+        }elseif ($post['type'] == 2) {
+            $data['suppliers_qualification'] = $post['desc'];
+        }else{
+            $data['suppliers_strength'] = $post['desc'];
+        }
+        $result = D("Suppliers")->editData($map,$data);
+        if ($result) {
+            $this->success("修改成功",U("Admin/Suppliers/index"));
+        }else{
+            $this->error("修改失败");
+        }
     }
     /**
      * 删除供应商
