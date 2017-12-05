@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; <if condition="$data['type'] eq 1">企业简介</if><if condition="$data['type'] eq 2">企业资质</if><if condition="$data['type'] eq 3">企业实力</if></div>
-    <form class="form-inline" action="{:U('Admin/Suppliers/desc_save')}" enctype="multipart/form-data" method="post">
+    <div class="bjy-admin-nav"><i class="fa fa-home"></i> 首页 &gt; 后台管理 &gt; <if condition="$data['type'] eq 1">售后保障</if><if condition="$data['type'] eq 2">规格参数</if></div>
+    <form class="form-inline" action="{:U('Admin/Goods/desc_save')}" enctype="multipart/form-data" method="post">
         <input type="hidden" name="id" value="{$data['id']}">
         <input type="hidden" name="type" value="{$data['type']}">
         <table class="table table-striped table-bordered table-hover table-condensed">
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td>
-                    <input class="btn btn-success" type="submit" value="添加">
+                    <input class="btn btn-success" type="submit" value="保存">
                 </td>
             </tr>
         </table>

@@ -48,9 +48,7 @@ class CateController extends AdminBaseController{
 		foreach ($rec as $k => $v) {
 			foreach ($recres as $k1 => $v1) {
 				if ($v1['rec_id'] == $v['id'] && $v1['value_id'] == $id) {
-					$rec[$k]['check'] = "checked";
-				}else{
-					$rec[$k]['check'] = "";
+					$rec[$k]['check'] = 1;
 				}
 			}
 		}

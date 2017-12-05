@@ -103,22 +103,37 @@ class BaseModel extends Model{
      * @param  integer  $field  $field
      * @return array            分页数据
      */
-    public function getPage($model,$map,$order='',$limit=10,$field=''){
+    public function getPage($model,$map,$order='',$limit=10,$field='',$join){
         $count=$model
             ->where($map)
             ->count();
         $page=new_page($count,$limit);
         // 获取分页数据
-        if (empty($field)) {
+        if (empty($field) && empty($join)) {
             $list=$model
                 ->where($map)
                 ->order($order)
                 ->limit($page->firstRow.','.$page->listRows)
                 ->select();         
+        }else if(!empty($join) && empty($field)){
+            $list=$model
+                ->where($map)
+                ->order($order)
+                ->join($join)
+                ->limit($page->firstRow.','.$page->listRows)
+                ->select();
+        }else if(empty($join) && !empty($field)){
+            $list=$model
+                ->field($field)
+                ->where($map)
+                ->order($order)
+                ->limit($page->firstRow.','.$page->listRows)
+                ->select();
         }else{
             $list=$model
                 ->field($field)
                 ->where($map)
+                ->join($join)
                 ->order($order)
                 ->limit($page->firstRow.','.$page->listRows)
                 ->select();         
