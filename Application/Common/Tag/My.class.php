@@ -29,7 +29,6 @@ class My extends TagLib {
         'webuploaderjs'=>array('','close'=>0),
         'vue'=>array('','close'=>0)
         );
-
     /**
      * layer弹出层
      */
