@@ -28,8 +28,9 @@
                         <td>
                             <if condition="$v['type'] eq 0">帮助信息</if>
                             <if condition="$v['type'] eq 1">网站公告</if>
-                            <if condition="$v['type'] eq 2">供应商入住</if>
-                            <if condition="$v['type'] eq 3">其他</if>
+                            <if condition="$v['type'] eq 2">解决方案</if>
+                            <if condition="$v['type'] eq 3">供应商入住</if>
+                            <if condition="$v['type'] eq 4">其他</if>
                         </td>
                         <td> <a href="javascript:;" PostsId="{$v['id']}" PostsType="{$v['type']}" PostsName="{$v['cname']}" onclick="edit(this)">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Posts/delete_category',array('id'=>$v['id']))}'">删除</a></td>
                     </tr>
@@ -61,11 +62,14 @@
                                     <span class="inputword">网站公告</span> 
                                     <input class="xb-icheck" type="radio" name="type" value="1">
                                     &emsp; 
-                                    <span class="inputword">供应商入住</span> 
+                                    <span class="inputword">解决方案</span> 
                                     <input class="xb-icheck" type="radio" name="type" value="2">
+                                    &emsp;
+                                    <span class="inputword">供应商入住</span> 
+                                    <input class="xb-icheck" type="radio" name="type" value="3">
                                     &emsp; 
                                     <span class="inputword">其他</span> 
-                                    <input class="xb-icheck" type="radio" name="type" value="3">
+                                    <input class="xb-icheck" type="radio" name="type" value="4">
                                 </td>
                             </tr>
                             <tr>
@@ -103,10 +107,12 @@
                                     <input class="xb-icheck edittype" type="radio" name="type" value="0"> &emsp; 
                                     <span class="inputword">网站公告</span> 
                                     <input class="xb-icheck edittype" type="radio" name="type" value="1"> &emsp; 
+                                    <span class="inputword">解决方案</span> 
+                                    <input class="xb-icheck edittype" type="radio" name="type" value="2"> &emsp; 
                                     <span class="inputword">供应商入住</span> 
-                                    <input class="xb-icheck edittype" type="radio" name="type" value="2">&emsp; 
+                                    <input class="xb-icheck edittype" type="radio" name="type" value="3"> &emsp; 
                                     <span class="inputword">其他</span> 
-                                    <input class="xb-icheck edittype" type="radio" name="type" value="3">   
+                                    <input class="xb-icheck edittype" type="radio" name="type" value="4">   
                                 </td>
                             </tr>
                             <tr>
