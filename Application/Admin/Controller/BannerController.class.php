@@ -9,9 +9,11 @@ class BannerController extends AdminBaseController{
 	 * 轮播图列表
 	 */
 	public function index(){
+		$suppliers = D('Suppliers')->getSuppliersList();
 		$data=D('AdminNav')->getTreeData('tree','order_number DESC,id');
 		$assign=array(
-			'data'=>$data
+			'data'=>$data,
+			'suppliers'=>$suppliers,
 			);
 		$this->assign($assign);
 		$this->display();
