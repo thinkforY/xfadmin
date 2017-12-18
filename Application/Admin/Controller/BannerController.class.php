@@ -10,9 +10,13 @@ class BannerController extends AdminBaseController{
 	 */
 	public function index(){
 		$suppliers = D('Suppliers')->getSuppliersList();
-		$data=D('AdminNav')->getTreeData('tree','order_number DESC,id');
+		$banner = D('Banner');
+		$field = "xf_banner.id,xf_banner.adname,xf_banner.adpic,xf_banner.adlink,xf_suppliers.suppliers_name";
+		$join = "LEFT JOIN xf_suppliers ON xf_banner.sid=xf_suppliers.id";
+		$data=$banner->getPage($banner,"",'id',10,$field,$join);
 		$assign=array(
-			'data'=>$data,
+			'data'=>$data['data'],
+			'page'=>$data['page'],
 			'suppliers'=>$suppliers,
 			);
 		$this->assign($assign);
@@ -25,9 +29,15 @@ class BannerController extends AdminBaseController{
 	public function add(){
 		$data=I('post.');
 		unset($data['id']);
-		$result=D('AdminNav')->addData($data);
+		$pic = post_upload("/Upload/Ad/");
+		if ($pic['name']) {
+			$cateres = D('Banner')->findData($data['id'],"adpic");
+			@unlink('.'.$cateres['adpic']);
+			$data['adpic'] = $pic['name'];
+		}
+		$result=D('Banner')->addData($data);
 		if ($result) {
-			$this->success('添加成功',U('Admin/Nav/index'));
+			$this->success('添加成功',U('Admin/Banner/index'));
 		}else{
 			$this->error('添加失败');
 		}
@@ -41,9 +51,15 @@ class BannerController extends AdminBaseController{
 		$map=array(
 			'id'=>$data['id']
 			);
-		$result=D('AdminNav')->editData($map,$data);
+		$pic = post_upload("/Upload/Ad/");
+		if ($pic['name']) {
+			$cateres = D('Banner')->findData($data['id'],"adpic");
+			@unlink('.'.$cateres['adpic']);
+			$data['adpic'] = $pic['name'];
+		}
+		$result=D('Banner')->editData($map,$data);
 		if ($result) {
-			$this->success('修改成功',U('Admin/Nav/index'));
+			$this->success('修改成功',U('Admin/Banner/index'));
 		}else{
 			$this->error('修改失败');
 		}
@@ -57,9 +73,9 @@ class BannerController extends AdminBaseController{
 		$map=array(
 			'id'=>$id
 			);
-		$result=D('AdminNav')->deleteData($map);
+		$result=D('Banner')->deleteData($map);
 		if($result){
-			$this->success('删除成功',U('Admin/Nav/index'));
+			$this->success('删除成功',U('Admin/Banner/index'));
 		}else{
 			$this->error('请先删除子轮播图');
 		}
@@ -70,9 +86,9 @@ class BannerController extends AdminBaseController{
 	 */
 	public function order(){
 		$data=I('post.');
-		$result=D('AdminNav')->orderData($data);
+		$result=D('Banner')->orderData($data);
 		if ($result) {
-			$this->success('排序成功',U('Admin/Nav/index'));
+			$this->success('排序成功',U('Admin/Banner/index'));
 		}else{
 			$this->error('排序失败');
 		}
