@@ -77,22 +77,7 @@ class BannerController extends AdminBaseController{
 		if($result){
 			$this->success('删除成功',U('Admin/Banner/index'));
 		}else{
-			$this->error('请先删除子轮播图');
+			$this->error("删除失败");
 		}
 	}
-
-	/**
-	 * 轮播图排序
-	 */
-	public function order(){
-		$data=I('post.');
-		$result=D('Banner')->orderData($data);
-		if ($result) {
-			$this->success('排序成功',U('Admin/Banner/index'));
-		}else{
-			$this->error('排序失败');
-		}
-	}
-
-
 }
