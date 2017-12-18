@@ -3,39 +3,47 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>菜单管理 - xfadmin</title>
+    <title>导航管理 - xfadmin</title>
     <bootstrapcss/>
 </head>
 
 <body>
-    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 菜单管理</div>
+    <div class="bjy-admin-nav"><a href="{:U('Admin/Index/index')}"><i class="fa fa-home"></i> 首页</a> &gt; 导航管理</div>
     <ul id="myTab" class="nav nav-tabs">
         <li class="active">
-            <a href="#home" data-toggle="tab">菜单列表</a>
+            <a href="#home" data-toggle="tab">导航列表</a>
         </li>
         <li>
-            <a href="javascript:;" onclick="add()">添加菜单</a>
+            <a href="javascript:;" onclick="add()">添加导航</a>
         </li>
     </ul>
-    <form action="{:U('Admin/Nav/order')}" method="post">
+    <form action="{:U('Admin/Navbar/order_navbar')}" method="post">
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="home">
                 <table class="table table-striped table-bordered table-hover table-condensed">
                     <tr>
                         <th width="5%">排序</th>
-                        <th>菜单名</th>
-                        <th>连接</th>
+                        <th>所属供应商</th>
+                        <th>导航名称</th>
+                        <th>导航位置</th>
+                        <th>是否显示</th>
                         <th>操作</th>
                     </tr>
                     <foreach name="data" item="v">
                         <tr>
                             <td>
-                                <input class="form-control" style="width:40px;height:25px;" type="text" name="{$v['id']}" value="{$v['order_number']}">
+                                <input class="form-control" type="text" name="{$v['id']}" value="{$v['sort']}">
                             </td>
+                            <td>{$v['suppliers_name']}</td>
                             <td>{$v['_name']}</td>
-                            <td>{$v['mca']}</td>
                             <td>
-                                <a href="javascript:;" navId="{$v['id']}" navName="{$v['name']}" onclick="add_child(this)">添加子菜单</a> | <a href="javascript:;" navId="{$v['id']}" navName="{$v['name']}" navMca="{$v['mca']}" navIco="{$v['ico']}" onclick="edit(this)">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Nav/delete',array('id'=>$v['id']))}'">删除</a>
+                                <if condition="$v['pos'] eq 0">底部导航</if>
+                                <if condition="$v['pos'] eq 1">中部导航</if>
+                                <if condition="$v['pos'] eq 2">顶部导航</if>
+                            </td>
+                            <td><if condition="$v['is_show'] eq 0">显示<else />不显示</if></td>
+                            <td>
+                                <a href="javascript:;" NavbarId="{$v['id']}" SupplierName="{$v['sid']}" NavbarPos="{$v['pos']}" onclick="add_child(this)">添加子导航</a> | <a href="javascript:;" NavbarId="{$v['id']}" NavbarName="{$v['title']}" NavbarMca="{$v['url']}" NavbarIco="{$v['is_show']}" onclick="edit(this)">修改</a> | <a href="javascript:if(confirm('确定删除？'))location='{:U('Admin/Navbar/delete',array('id'=>$v['id']))}'">删除</a>
                             </td>
                         </tr>
                     </foreach>
@@ -55,26 +63,54 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> 添加菜单</h4></div>
+                    <h4 class="modal-title" id="myModalLabel"> 添加导航</h4></div>
                 <div class="modal-body">
-                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Nav/add')}" method="post">
+                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Navbar/add')}" method="post">
                         <input type="hidden" name="pid" value="0">
                         <table class="table table-striped table-bordered table-hover table-condensed">
                             <tr>
-                                <th width="12%">菜单名：</th>
+                                <th>所属供应商：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="name">
+                                    <select name="sid" id="">
+                                        <option value="0">默认供应商</option>
+                                        <foreach name="suppliers" item="v">
+                                            <option value="{$v['id']}">{$v['suppliers_name']}</option>
+                                        </foreach>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
-                                <th>连接：</th>
+                                <th>导航名称：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="mca"> 输入模块/控制器/方法即可 例如 Admin/Nav/index</td>
+                                    <input class="form-control" type="text" name="title">
+                                </td>
                             </tr>
                             <tr>
-                                <th>图标：</th>
+                                <th>链接：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="ico"> font-awesome图标 输入fa fa- 后边的即可</td>
+                                    <input class="form-control" type="text" name="url">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>位置：</th>
+                                <td>
+                                    <span class="inputword">底部导航</span> 
+                                    <input class="xb-icheck" type="radio" name="pos" value="0" checked="checked"> &emsp; 
+                                    <span class="inputword">中部导航</span> 
+                                    <input class="xb-icheck" type="radio" name="pos" value="1">
+                                    &emsp; 
+                                    <span class="inputword">顶部导航</span> 
+                                    <input class="xb-icheck" type="radio" name="pos" value="2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>是否显示：</th>
+                                <td>
+                                    <span class="inputword">显示</span> 
+                                    <input class="xb-icheck" type="radio" name="is_show" value="0" checked="checked"> &emsp; 
+                                    <span class="inputword">不显示</span> 
+                                    <input class="xb-icheck" type="radio" name="is_show" value="1">
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -93,26 +129,31 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
-                    <h4 class="modal-title" id="myModalLabel"> 修改菜单</h4></div>
+                    <h4 class="modal-title" id="myModalLabel"> 修改导航</h4></div>
                 <div class="modal-body">
-                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Nav/edit')}" method="post">
+                    <form id="bjy-form" class="form-inline" action="{:U('Admin/Navbar/edit')}" method="post">
                         <input type="hidden" name="id">
                         <table class="table table-striped table-bordered table-hover table-condensed">
                             <tr>
-                                <th width="12%">菜单名：</th>
+                                <th>导航名称：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="name">
+                                    <input class="form-control" type="text" name="title">
                                 </td>
                             </tr>
                             <tr>
-                                <th>连接：</th>
+                                <th>链接：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="mca"> 输入模块/控制器/方法即可 例如 Admin/Nav/index</td>
+                                    <input class="form-control" type="text" name="url">
+                                </td>
                             </tr>
                             <tr>
-                                <th>图标：</th>
+                                <th>是否显示：</th>
                                 <td>
-                                    <input class="form-control" type="text" name="ico"> font-awesome图标 输入fa fa- 后边的即可</td>
+                                    <span class="inputword">显示</span> 
+                                    <input class="xb-icheck is_show" type="radio" name="is_show" value="0" checked="checked"> &emsp; 
+                                    <span class="inputword">不显示</span> 
+                                    <input class="xb-icheck is_show" type="radio" name="is_show" value="1">
+                                </td>
                             </tr>
                             <tr>
                                 <th></th>
@@ -128,33 +169,45 @@
     </div>
     <bootstrapjs/>
     <script>
-    // 添加菜单
+    // 添加导航
     function add() {
-        $("input[name='name'],input[name='mca']").val('');
+        $("select[name='sid']").parent().show();
+        $("input[name='pos']").parent().show();
+        $("select[name='sid']").parent().prev().show();
+        $("input[name='pos']").parent().prev().show();
+        $("input[name='title'],input[name='url']").val('');
         $("input[name='pid']").val(0);
         $('#bjy-add').modal('show');
     }
 
-    // 添加子菜单
+    // 添加子导航
     function add_child(obj) {
-        var navId = $(obj).attr('navId');
-        $("input[name='pid']").val(navId);
-        $("input[name='name']").val('');
-        $("input[name='mca']").val('');
-        $("input[name='ico']").val('');
+        var NavbarId = $(obj).attr('NavbarId');
+        var NavbarPos = $(obj).attr('NavbarId');
+        var SupplierName = $(obj).attr('SupplierName');
+        $("input[name='pid']").val(NavbarId);
+        $("select[name='sid']").val(SupplierName);
+        $("select[name='sid']").parent().hide();
+        $("input[name='pos']").parent().hide();
+        $("select[name='sid']").parent().prev().hide();
+        $("input[name='pos']").parent().prev().hide();
+        $("input[name='title']").val('');
+        $("input[name='url']").val('');
+        $("input[name='pos']").val(NavbarPos);
         $('#bjy-add').modal('show');
     }
 
-    // 修改菜单
+    // 修改导航
     function edit(obj) {
-        var navId = $(obj).attr('navId');
-        var navName = $(obj).attr('navName');
-        var navMca = $(obj).attr('navMca');
-        var navIco = $(obj).attr('navIco');
-        $("input[name='id']").val(navId);
-        $("input[name='name']").val(navName);
-        $("input[name='mca']").val(navMca);
-        $("input[name='ico']").val(navIco);
+        var NavbarId = $(obj).attr('NavbarId');
+        var NavbarName = $(obj).attr('NavbarName');
+        var NavbarMca = $(obj).attr('NavbarMca');
+        var NavbarIco = $(obj).attr('NavbarIco');
+        alert(NavbarIco);
+        $("input[name='id']").val(NavbarId);
+        $("input[name='title']").val(NavbarName);
+        $("input[name='url']").val(NavbarMca);
+        $(".is_show").eq(NavbarIco).attr("checked","checked");
         $('#bjy-edit').modal('show');
     }
     </script>

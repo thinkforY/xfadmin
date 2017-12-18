@@ -22,7 +22,10 @@ class SuppliersModel extends BaseModel{
 		return $result;
 	}
 
-
+	//获取供应商
+	public function getSuppliersList(){
+		return $this->field("id,suppliers_name")->select();
+	}
 
 
 }
