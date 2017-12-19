@@ -12,9 +12,13 @@ class AdminBaseController extends BaseController{
 		parent::_initialize();
 		$auth=new \Think\Auth();
 		$rule_name=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
-		$result=$auth->check($rule_name,$_SESSION['user']['id']);
-		if(!$result){
-			$this->error('您没有权限访问');
+		if (!check_login()) {
+			$this->error("请先登录",U("Admin/Login/index"));
+		}else{
+			$result=$auth->check($rule_name,$_SESSION['user']['id']);
+			if(!$result){
+				$this->error('您没有权限访问');
+			}
 		}
 	}
 
