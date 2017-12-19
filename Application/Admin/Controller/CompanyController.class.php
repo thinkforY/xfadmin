@@ -4,7 +4,7 @@ use Common\Controller\AdminBaseController;
 /**
  * 后台首页控制器
  */
-class CommonController extends AdminBaseController{
+class CompanyController extends AdminBaseController{
 	/**
 	 * 首页
 	 */
