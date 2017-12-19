@@ -12,7 +12,4 @@ class IndexController extends UserBaseController{
     public function index(){
         $this->display();
     }
-
-
-
 }

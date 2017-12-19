@@ -36,9 +36,9 @@
                             <td>
                                 <input class="form-control" style="width:40px;height:25px;" type="text" name="{$v['id']}" value="{$v['sort']}">
                             </td>
-                            <td>{$v['goods_name']}</td>
-                            <td>{$v['catename']}</td>
                             <td>{$v['suppliers_name']}</td>
+                            <td>{$v['catename']}</td>
+                            <td>{$v['goods_name']}</td> 
                             <td>{$v['market_price']}</td>
                             <td>{$v['shop_price']}</td>
                             <td><if condition="$v['is_on_sale'] eq 1">是<else />否</if></td>
@@ -51,8 +51,6 @@
                         <th>
                             <input class="btn btn-success" type="submit" value="排序">
                         </th>
-                        <td></td>
-                        <td></td>
                     </tr>
                 </table>
                 <div style="width: 100%;text-align: center;">
